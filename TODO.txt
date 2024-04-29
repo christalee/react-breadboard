@@ -1,0 +1,22 @@
+Basic functionality
+- display NxM cells, grouped by 5 vertically, plus two voltage/ground rails
+- select V for the board
+- select LED (bandgap) or R (ohms), then click on two cells to draw an LED across it
+- select LED to see how much V, I is coming across it, bandgap, etc.
+- select the eraser button and click to remove components
+- should handle series and parallel layouts
+- 
+
+
+Stretch goals
+- include L, C components
+- include switches and regular bulbs (with linear dimming)
+- highlight LEDs red when too much V / I goes across them
+- show current flow with arrows
+- name/save designs (localstorage?)
+- Node/Mongo backend (for solving, saving, exporting, parts catalog)
+- export circuit schematic
+- parts library with real data/sheets
+
+Misc
+- remove unused CSS files
