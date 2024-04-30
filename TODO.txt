@@ -3,7 +3,7 @@ Basic functionality
 - select V for the board
 - select LED (bandgap) or R (ohms), then click on two cells to draw an LED across it
 - select LED to see how much V, I is coming across it, bandgap, etc.
-- select the eraser button and click to remove components
+- select the start/end cell to remove components
 - should handle series and parallel layouts
 - 
 
@@ -20,3 +20,5 @@ Stretch goals
 
 Misc
 - remove unused CSS files
+- properly set initial value for elementValue select
+- properly show LED symbol on button

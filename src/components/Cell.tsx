@@ -11,10 +11,12 @@ type CellProps = {
   setClickStart: React.Dispatch<React.SetStateAction<number[]>>,
   setSvgs: React.Dispatch<React.SetStateAction<{
     component: string,
+    value: string,
     start: number[],
     end: number[],
   }[]>>,
-
+  elementType: string,
+  elementValue: string,
 }
 
 function getCenter(col: number, row: number, size: number) {
@@ -22,7 +24,18 @@ function getCenter(col: number, row: number, size: number) {
   return [col * (size + 2) + (size + 2) / 2, row * (size + 2) + (size + 2) / 2]
 }
 
-function Cell({row, col, size, isClicking, setIsClicking, clickStart, setClickStart, setSvgs}: CellProps) {
+function Cell({
+                row,
+                col,
+                size,
+                isClicking,
+                setIsClicking,
+                clickStart,
+                setClickStart,
+                setSvgs,
+                elementType,
+                elementValue
+              }: CellProps) {
 
   const handleMouseDown = () => {
     console.log('mouseDown', col, row);
@@ -34,7 +47,8 @@ function Cell({row, col, size, isClicking, setIsClicking, clickStart, setClickSt
     console.log('mouseUp', col, row);
     const clickEnd = getCenter(col, row, size);
     isClicking && setSvgs(prev => [...prev, {
-      component: 'LED',
+      component: elementType,
+      value: elementValue,
       start: clickStart,
       end: clickEnd,
     }]);
@@ -50,7 +64,8 @@ function Cell({row, col, size, isClicking, setIsClicking, clickStart, setClickSt
 export default Cell
 
 const StyledCell = styled.div<{ $size?: number; }>`
-  border: solid black 1px;
+  border: solid grey 1px;
+  opacity: 0.5;
   height: ${props => props.$size}px;
   width: ${props => props.$size}px;           
 `
