@@ -1,9 +1,9 @@
 Basic functionality
 - display NxM cells, grouped by 5 vertically, plus two voltage/ground rails
 - select V for the board
-- select LED (bandgap) or R (ohms), then click on two cells to draw an LED across it
+- DONE select LED (bandgap) or R (ohms), then click on two cells to draw an LED across it
 - select LED to see how much V, I is coming across it, bandgap, etc.
-- select the start/end cell to remove components
+- DONE select the start/end cell to remove components
 - should handle series and parallel layouts
 - 
 
@@ -21,4 +21,3 @@ Stretch goals
 Misc
 - remove unused CSS files
 - properly set initial value for elementValue select
-- properly show LED symbol on button

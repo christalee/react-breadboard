@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 type CellProps = {
   row: number,
@@ -9,6 +9,12 @@ type CellProps = {
   setIsClicking: React.Dispatch<React.SetStateAction<boolean>>,
   clickStart: number[],
   setClickStart: React.Dispatch<React.SetStateAction<number[]>>,
+  svgs: {
+    component: string,
+    value: string,
+    start: number[],
+    end: number[],
+  }[],
   setSvgs: React.Dispatch<React.SetStateAction<{
     component: string,
     value: string,
@@ -20,8 +26,12 @@ type CellProps = {
 }
 
 function getCenter(col: number, row: number, size: number) {
-  //  add 2 to WIDTH and HEIGHT to account for border width
+  //  add 2 to SIZE to account for border width, plus half again to center
   return [col * (size + 2) + (size + 2) / 2, row * (size + 2) + (size + 2) / 2]
+}
+
+function equalArray(a: number[], b: number[]) {
+  return a.length == b.length && a.every((element, index) => element === b[index]);
 }
 
 function Cell({
@@ -32,27 +42,28 @@ function Cell({
                 setIsClicking,
                 clickStart,
                 setClickStart,
+                svgs,
                 setSvgs,
                 elementType,
                 elementValue
               }: CellProps) {
+  const center = getCenter(col, row, size);
+  const isOccupied: boolean = svgs.filter((svg) => equalArray(svg.start, center) || equalArray(svg.end, center)).length > 0;
 
   const handleMouseDown = () => {
-    console.log('mouseDown', col, row);
-    !isClicking && setClickStart(getCenter(col, row, size));
-    !isClicking && setIsClicking(true);
+    !isOccupied && !isClicking && setClickStart(center);
+    !isOccupied && !isClicking && setIsClicking(true);
   }
 
   const handleMouseUp = () => {
-    console.log('mouseUp', col, row);
-    const clickEnd = getCenter(col, row, size);
-    isClicking && setSvgs(prev => [...prev, {
+    !isOccupied && isClicking && setSvgs(prev => [...prev, {
       component: elementType,
       value: elementValue,
       start: clickStart,
-      end: clickEnd,
+      end: center,
     }]);
-    isClicking && setIsClicking(false);
+    !isOccupied && isClicking && setIsClicking(false);
+    isOccupied && setSvgs(prev => prev.filter((svg) => !equalArray(svg.start, center) && !equalArray(svg.end, center)))
   }
 
   return (

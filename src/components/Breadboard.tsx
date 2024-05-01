@@ -63,6 +63,7 @@ function Breadboard({elementType, elementValue}: BreadboardProps) {
                                                                            setIsClicking={setIsClicking}
                                                                            clickStart={clickStart}
                                                                            setClickStart={setClickStart}
+                                                                           svgs={svgs}
                                                                            setSvgs={setSvgs}
                                                                            elementType={elementType}
                                                                            elementValue={elementValue}
