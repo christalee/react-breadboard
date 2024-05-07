@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 type CellProps = {
   row: number,
@@ -31,7 +31,7 @@ function getCenter(col: number, row: number, size: number) {
 }
 
 function equalArray(a: number[], b: number[]) {
-  return a.length == b.length && a.every((element, index) => element === b[index]);
+  return a.length === b.length && a.every((element, index) => element === b[index]);
 }
 
 function Cell({
@@ -67,16 +67,22 @@ function Cell({
   }
 
   return (
-    <StyledCell data-row={row} data-col={col} $size={size} onMouseDown={handleMouseDown}
+    <StyledCell data-row={row} data-col={col} $row={row} $col={col} $size={size} onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}></StyledCell>
   )
 }
 
 export default Cell
 
-const StyledCell = styled.div<{ $size?: number; }>`
-  border: solid grey 1px;
-  opacity: 0.5;
-  height: ${props => props.$size}px;
-  width: ${props => props.$size}px;           
+const StyledCell = styled.rect.attrs<{ $size: number; $row: number; $col: number; }>(props => ({
+  style: {
+    x: props.$col * (props.$size + 2),
+    y: props.$row * (props.$size + 2),
+    height: props.$size + 2,
+    width: props.$size + 2,
+  },
+}))`
+  fill: white;
+  stroke: grey;
+  stroke-opacity: 0.5;
 `

@@ -1,5 +1,4 @@
 import {useState} from 'react';
-import styled from 'styled-components';
 import Cell from './Cell';
 import Led from './Led';
 import Resistor from './Resistor';
@@ -44,47 +43,33 @@ function Breadboard({elementType, elementValue}: BreadboardProps) {
   const [clickStart, setClickStart] = useState<clickStartProps | never[]>([])
 
   return (
-    <Overlay>
+    <div>
       <svg xmlns="http://www.w3.org/2000/svg"
            width={NUM_COLS * (SIZE + 2)}
            height={NUM_ROWS * (SIZE + 2)}
            fill="black"
            viewBox={`0 0 ${NUM_COLS * (SIZE + 2)} ${NUM_ROWS * (SIZE + 2)}`}>
+        {
+          ROWS.map((r, i_r) => <svg key={i_r}>{COLUMNS.map((c, i_c) => <Cell key={`${i_r}x${i_c}`} row={i_r} col={i_c}
+                                                                             size={SIZE}
+                                                                             isClicking={isClicking}
+                                                                             setIsClicking={setIsClicking}
+                                                                             clickStart={clickStart}
+                                                                             setClickStart={setClickStart}
+                                                                             svgs={svgs}
+                                                                             setSvgs={setSvgs}
+                                                                             elementType={elementType}
+                                                                             elementValue={elementValue}
+          />)}</svg>)
+        }
         {svgs.map(obj => {
           const Component = selectComponent(obj.component);
           return (
             <Component key={`${obj.start}_${obj.end}`} value={obj.value} start={obj.start} end={obj.end}/>)
         })}
       </svg>
-      {
-        ROWS.map((r, i_r) => <Row key={i_r}>{COLUMNS.map((c, i_c) => <Cell key={`${i_r}x${i_c}`} row={i_r} col={i_c}
-                                                                           size={SIZE}
-                                                                           isClicking={isClicking}
-                                                                           setIsClicking={setIsClicking}
-                                                                           clickStart={clickStart}
-                                                                           setClickStart={setClickStart}
-                                                                           svgs={svgs}
-                                                                           setSvgs={setSvgs}
-                                                                           elementType={elementType}
-                                                                           elementValue={elementValue}
-        />)}</Row>)
-      }
-    </Overlay>
+    </div>
   )
 }
 
 export default Breadboard;
-
-const Row = styled.div`
-  display: flex;
-`
-
-const Overlay = styled.div`
-  position: relative;
-  svg {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: -1;
-  }
-`
