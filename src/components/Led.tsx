@@ -1,4 +1,4 @@
-import {ElementProps} from './elements';
+import {ElementProps} from './types';
 import ElementTooltip from './ElementTooltip';
 import {createRef} from 'react';
 

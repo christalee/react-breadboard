@@ -1,4 +1,4 @@
-import {ElementProps} from "./elements";
+import {ElementProps} from "./types";
 import ElementTooltip from './ElementTooltip';
 import {createRef} from 'react';
 
@@ -22,7 +22,7 @@ function Resistor({start, end, value}: ElementProps) {
     l5 10
     l2.5 -5
     l15 0" stroke="black" strokeWidth="1" strokeLinejoin="bevel" fill="none"
-            transform={`rotate(${angle}, ${start[0]}, ${start[1]}) translate(${start[0]}, ${start[1]}) scale(${scale}, 1)`}
+            transform={`translate(${start[0]}, ${start[1]}) rotate(${angle}) scale(${scale}, 1)`}
             ref={triggerRef}></path>
       <ElementTooltip triggerRef={triggerRef} textArray={[`R (${value})`, 'Voltage: ', 'Current: ']}/>
     </>
