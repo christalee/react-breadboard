@@ -1,6 +1,9 @@
 import {ElementProps} from "./elements";
+import ElementTooltip from './ElementTooltip';
+import {createRef} from 'react';
 
 function Resistor({start, end, value}: ElementProps) {
+  const triggerRef = createRef<SVGPathElement>();
   // Math.atan2 is not atan^2 but an alternative atan fn that works when x < 0
   // it gives results in radians as rotation counterclockwise from the positive x axis
   // so we need to convert to degrees and subtract 180 to get the clockwise SVG rotation
@@ -8,7 +11,8 @@ function Resistor({start, end, value}: ElementProps) {
   // The original SVG is 60px long
   const scale = Math.sqrt((start[0] - end[0]) ** 2 + (start[1] - end[1]) ** 2) / 60;
   return (
-    <path d="M 0 0
+    <>
+      <path d="M 0 0
     l15 0
     l2.5 -5
     l5 10
@@ -18,7 +22,10 @@ function Resistor({start, end, value}: ElementProps) {
     l5 10
     l2.5 -5
     l15 0" stroke="black" strokeWidth="1" strokeLinejoin="bevel" fill="none"
-          transform={`rotate(${angle}, ${start[0]}, ${start[1]}) translate(${start[0]}, ${start[1]}) scale(${scale}, 1)`}></path>
+            transform={`rotate(${angle}, ${start[0]}, ${start[1]}) translate(${start[0]}, ${start[1]}) scale(${scale}, 1)`}
+            ref={triggerRef}></path>
+      <ElementTooltip triggerRef={triggerRef} textArray={[`R (${value})`, 'Voltage: ', 'Current: ']}/>
+    </>
   );
 }
 
