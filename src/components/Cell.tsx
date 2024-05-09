@@ -5,6 +5,7 @@ type CellProps = {
   row: number,
   col: number,
   size: number,
+  offset: number,
   isClicking: boolean,
   setIsClicking: React.Dispatch<React.SetStateAction<boolean>>,
   clickStart: number[],
@@ -25,9 +26,10 @@ type CellProps = {
   elementValue: string,
 }
 
-function getCenter(col: number, row: number, size: number) {
-  //  add 2 to SIZE to account for border width, plus half again to center
-  return [col * (size + 2) + (size + 2) / 2, row * (size + 2) + (size + 2) / 2]
+function getCenter(col: number, row: number, size: number, offset: number) {
+  // add 2 to SIZE to account for border width, plus half again to center
+  // add offset to account for gutters
+  return [col * (size + 2) + (size + 2) / 2, row * (size + 2) + (size + 2) / 2 + offset]
 }
 
 function equalArray(a: number[], b: number[]) {
@@ -38,6 +40,7 @@ function Cell({
                 row,
                 col,
                 size,
+  offset,
                 isClicking,
                 setIsClicking,
                 clickStart,
@@ -47,7 +50,7 @@ function Cell({
                 elementType,
                 elementValue
               }: CellProps) {
-  const center = getCenter(col, row, size);
+  const center = getCenter(col, row, size, offset);
   const isOccupied: boolean = svgs.filter((svg) => equalArray(svg.start, center) || equalArray(svg.end, center)).length > 0;
 
   const handleMouseDown = () => {
@@ -83,6 +86,6 @@ const StyledCell = styled.rect.attrs<{ $size: number; $row: number; $col: number
   },
 }))`
   fill: white;
-  stroke: grey;
+  stroke: #38598b;
   stroke-opacity: 0.5;
 `

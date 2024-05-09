@@ -1,7 +1,8 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 //import './App.css';
 import Breadboard from './components/Breadboard';
 import Controls from './components/Controls';
+import styled from 'styled-components';
 
 function getElementSelectValues(elementType: string) {
   switch (elementType) {
@@ -18,14 +19,28 @@ function getElementSelectValues(elementType: string) {
 function App() {
   const [elementType, setElementType] = useState('wire')
   const options = getElementSelectValues(elementType);
-  const [elementValue, setElementValue] = useState(options[0])
+  const [elementValue, setElementValue] = useState('')
+  useEffect(() => {
+    setElementValue(options[0]);
+  }, [options])
+  const [voltage, setVoltage] = useState(5);
+  const [rows, setRows] = useState(20);
+  const [cols, setCols] = useState(30);
   return (
-    <>
+    <Container>
       <Controls elementType={elementType} setElementType={setElementType} elementValue={elementValue}
-                setElementValue={setElementValue} options={options}/>
-      <Breadboard elementType={elementType} elementValue={elementValue}/>
-    </>
+                setElementValue={setElementValue} options={options} voltage={voltage} setVoltage={setVoltage} rows={rows} setRows={setRows} cols={cols} setCols={setCols}/>
+      <Breadboard elementType={elementType} elementValue={elementValue} rows={rows} cols={cols}/>
+    </Container>
   );
 }
 
 export default App;
+
+const Container = styled.div`
+  margin: 12px;
+  padding: 12px;
+  border: 2px #a2a8d3 solid;
+  border-radius: 6px;
+  background: #e7eaf6;
+`

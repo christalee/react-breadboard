@@ -19,5 +19,4 @@ Stretch goals
 - parts library with real data/sheets
 
 Misc
-- remove unused CSS files
-- properly set initial value for elementValue select
+- remove unused CSS files, update manifest? what is in the public folder?
