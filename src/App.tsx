@@ -19,10 +19,13 @@ function getElementSelectValues(elementType: string) {
 function App() {
   const [elementType, setElementType] = useState('wire')
   const options = getElementSelectValues(elementType);
+  // declare this specifically so useEffect doesn't fire too often
+  // (b/c arrays compare by reference while strings compare by value)
+  const firstOption = options[0]
   const [elementValue, setElementValue] = useState('')
   useEffect(() => {
-    setElementValue(options[0]);
-  }, [options])
+    setElementValue(firstOption);
+  }, [firstOption])
   const [voltage, setVoltage] = useState(5);
   const [rows, setRows] = useState(20);
   const [cols, setCols] = useState(30);

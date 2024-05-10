@@ -7,9 +7,8 @@ const ToolRect = styled.rect`
   height: 50px;
   rx: 5;
   ry: 5;
-  fill: grey;
-  fill-opacity: 0.5;
-  stroke: black;
+  fill: #e7eaf6;
+  stroke: #113f67;
 `
 
 const ToolText = styled.text<{ $fontSize: number }>`

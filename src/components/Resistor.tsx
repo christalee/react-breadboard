@@ -1,9 +1,9 @@
 import {ElementProps} from "./types";
 import ElementTooltip from './ElementTooltip';
-import {createRef} from 'react';
+import {useRef} from 'react';
 
 function Resistor({start, end, value}: ElementProps) {
-  const triggerRef = createRef<SVGPathElement>();
+  const triggerRef = useRef<SVGPathElement>(null);
   // Math.atan2 is not atan^2 but an alternative atan fn that works when x < 0
   // it gives results in radians as rotation counterclockwise from the positive x axis
   // so we need to convert to degrees and subtract 180 to get the clockwise SVG rotation

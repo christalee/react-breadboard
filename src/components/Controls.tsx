@@ -45,7 +45,7 @@ export default Controls;
 
 const Element = styled.label<{$shouldFocus: boolean}>`
   display: flex;
-  border: ${props => props.$shouldFocus ? "2px black solid" : "1px grey solid"};
+  border: ${props => props.$shouldFocus ? "2px #38598b solid" : "1px #a2a8d3 solid"};
   border-radius: 3px;
   margin: 6px;
   font-size: 12px;
@@ -59,6 +59,7 @@ const Element = styled.label<{$shouldFocus: boolean}>`
 const ElementSelect = styled.select`
   height: 22px;
   margin: 6px;
+  border-color: #a2a8d3;
 `
 
 const ElementDiv = styled.div`
@@ -68,7 +69,8 @@ const ElementDiv = styled.div`
 
 const StyledInput = styled.input`
   width: 3em;
-  margin: 0 6px 6px 3px;
+  margin: 6px 6px 6px 3px;
+  border: 1px #a2a8d3 solid;
 `
 
 const ControlsDiv = styled.div`

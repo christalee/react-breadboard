@@ -1,10 +1,10 @@
 import {ElementProps} from './types';
 import ElementTooltip from './ElementTooltip';
-import {createRef} from 'react';
+import {useRef} from 'react';
 
 
 function Led({start, end, value}: ElementProps) {
-  const triggerRef = createRef<SVGGElement>();
+  const triggerRef = useRef<SVGGElement>(null);
   const center = [(start[0] + end[0]) / 2, (start[1] + end[1]) / 2]
   // Draw an equilateral triangle with side 12
   const point1 = [center[0] + 4 * Math.sqrt(3), center[1]]
